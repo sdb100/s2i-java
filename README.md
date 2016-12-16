@@ -1,6 +1,6 @@
 # s2i-java
 
-This is a generic s2i implementation designed to be used with the OpenShift Container Platform Container Development Kit (CDK). It provides a builder image that can be pushed in to OpenShift's Docker repo and used to build arbitrary Java fatjar applications, such as Spring Boot or vertx web apps. You can use an Oracle JVM or OpenJDK.
+This is a generic s2i implementation designed to be used with the OpenShift Container Platform Container Development Kit (CDK). It provides a builder image that can be pushed in to OpenShift's Docker repo and used to build arbitrary Java fatjar applications, such as Spring Boot or vertx web apps. 
 
 ### How to use
 
@@ -42,7 +42,7 @@ The CDK doesn't come with any kind of Java builder image, which is a bit odd, bu
 
 Clone this repo locally, somewhere under your home dir. The CDK VM mounts your home dir by default, so once you have used _vagrant ssh_, you should be able to navigate to the cloned repo from within the image. The following assumes you have done so, and run _oc login_ as above. 
 
-First build the Docker s2i image. **You will need a jre tar.gz in the _jvm_ subdirectory before running this**, so download it from Oracle or elsewhere and put it in there. It gets built in to the image.
+First build the Docker s2i image. It will download the Java 8 server JRE build 111.
 ```
 docker build -t s2i-java . 
 ```

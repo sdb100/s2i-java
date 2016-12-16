@@ -4,23 +4,20 @@
 # docker build -t first-project/s2i-java .
 # docker run -t -i first-project/s2i-java /bin/bash
 
-FROM rhel7:latest
+FROM registry.access.redhat.com/rhel7:latest
 
 MAINTAINER Steve Bell <steve.bell@worldpay.com>
 
 ENV MAVEN_VERSION 3.3.9
 
-# Install Oracle J8 from local zip #############################
-# Assumes the jvm is a tar.gz in the ./jvm directory ###########
-# Remove this if building from a J8 base image #################
-COPY ./jvm/*.gz /opt/jvm/
-RUN cd /opt/jvm \
-    && tar xf *.tar.gz \
-    && mv jdk* jdk \
-    && ln -s /opt/jvm/jdk/bin/java /bin/java \
-    && rm /opt/jvm/*.tar.gz
+RUN cd /opt \
+  && curl -b oraclelicense=accept-securebackup-cookie -O -L http://download.oracle.com/otn-pub/java/jdk/8u111-b14/server-jre-8u111-linux-x64.tar.gz \
+  && tar xf *.tar.gz \
+  && mv jdk* jdk \
+  && ln -s /opt/jdk/bin/java /bin/java \
+  && rm /opt/*.tar.gz
 
-ENV JAVA_HOME=/opt/jvm/jdk
+#ENV JAVA_HOME=/opt/jdk
 
 # HOME in base image is /opt/app-root/src
 
