@@ -17,7 +17,7 @@ RUN cd /opt \
   && ln -s /opt/jdk/bin/java /bin/java \
   && rm /opt/*.tar.gz
 
-#ENV JAVA_HOME=/opt/jdk
+ENV JAVA_HOME=/opt/jdk
 
 # HOME in base image is /opt/app-root/src
 
